@@ -22,6 +22,11 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
+### `yarn start` or `npm run start`
+**Note: this command can only be run after `yarn build` or `npm run build`.!**
+
+Starts the production app on the `.next` folder.\
+
 ### `yarn lint` or `npm run lint`
 
 Lints the code using ESLint
