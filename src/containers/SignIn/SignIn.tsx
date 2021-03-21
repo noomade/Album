@@ -17,9 +17,6 @@ import { composeValidators, email, required } from '../../components/Field/valid
 // MIDDLEWARE
 import { retrieve, save, SupportedStorageKeys } from '../../middleware/LocalStorage';
 
-// TYPES
-import type { DefaultPageProps } from '../../types';
-
 type SignInFormValues = {
   email: string;
   password: string;
