@@ -18,9 +18,3 @@ export interface ExtendedAlbum extends Album {
   thumbnailUrl: string;
   photos: Photos;
 }
-
-export interface DefaultPageProps {
-  user: null | string;
-  token: null | string;
-  setUser: (value: null | string) => void;
-}

@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 
 // TYPES
-import type { DefaultPageProps, ExtendedAlbum } from '../../types';
+import type { ExtendedAlbum } from '../../types';
 
 // COMPONENTS
 import Container from '@material-ui/core/Container';
@@ -16,14 +16,21 @@ import { useRouter } from 'next/router';
 // MIDDLEWARE
 import { retrieve, SupportedStorageKeys } from '../../middleware/LocalStorage';
 
-export interface AlbumsPageProps extends DefaultPageProps {
+export interface AlbumsPageProps {
   albums: Array<ExtendedAlbum>;
   searchText: string;
 }
 
-function AlbumsPage({ albums, searchText, user }: AlbumsPageProps): ReactElement {
+function AlbumsPage({ albums, searchText }: AlbumsPageProps): ReactElement {
   const [albumsDisplay, setAlbumsDisplay] = React.useState<Array<ExtendedAlbum>>([]);
   const router = useRouter();
+  const [user, setUser] = React.useState<string>('');
+  React.useEffect(() => {
+    const usr: string = retrieve(SupportedStorageKeys.AlbumEmail);
+    if (usr) {
+      setUser(usr);
+    }
+  }, []);
   React.useEffect(() => {
     if (!user && !retrieve(SupportedStorageKeys.AlbumEmail)) {
       router.push('/');

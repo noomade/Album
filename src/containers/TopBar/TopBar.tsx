@@ -16,6 +16,7 @@ import SearchIcon from '@material-ui/icons/Search';
 
 // NEXT JS
 import { useRouter } from 'next/router';
+import { retrieve, SupportedStorageKeys } from '../../middleware/LocalStorage';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -90,13 +91,19 @@ export const pages: { [name: string]: string } = {
 export interface TopBarProps {
   searchText: string;
   onSearchChange: (value: string) => void;
-  user: null | string;
 }
 
-function TopBar({ searchText, onSearchChange, user }: TopBarProps): ReactElement {
+function TopBar({ searchText, onSearchChange }: TopBarProps): ReactElement {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const classes = useStyles();
   const router = useRouter();
+  const [user, setUser] = React.useState<string>('');
+  React.useEffect(() => {
+    const usr: string = retrieve(SupportedStorageKeys.AlbumEmail);
+    if (usr) {
+      setUser(usr);
+    }
+  }, [retrieve(SupportedStorageKeys.AlbumEmail)]);
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);

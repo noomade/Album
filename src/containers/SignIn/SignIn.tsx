@@ -44,12 +44,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function SignIn({ setUser }: DefaultPageProps): ReactElement {
+function SignIn(): ReactElement {
   const classes = useStyles();
   const router = useRouter();
   React.useEffect(() => {
     if (retrieve(SupportedStorageKeys.AlbumEmail) || retrieve(SupportedStorageKeys.AlbumToken)) {
-      setUser(retrieve(SupportedStorageKeys.AlbumEmail));
+      save(SupportedStorageKeys.AlbumEmail, retrieve(SupportedStorageKeys.AlbumEmail));
       // TODO: validate token
       router.push('/albums');
     }
@@ -60,7 +60,6 @@ function SignIn({ setUser }: DefaultPageProps): ReactElement {
         onSubmit={(values: SignInFormValues) => {
           if (typeof localStorage !== undefined) {
             save(SupportedStorageKeys.AlbumEmail, values.email);
-            setUser(values.email);
             // TODO: async call in redux
             router.push('/albums');
           }

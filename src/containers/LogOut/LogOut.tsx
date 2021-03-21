@@ -10,16 +10,11 @@ import { useRouter } from 'next/router';
 // MIDDLEWARE
 import { removeEntry, SupportedStorageKeys } from '../../middleware/LocalStorage';
 
-// TYPES
-import type { DefaultPageProps } from '../../types';
-
-
-function LogOutPage({ setUser }: DefaultPageProps): ReactElement {
+function LogOutPage(): ReactElement {
   const router = useRouter();
   React.useEffect(() => {
     removeEntry(SupportedStorageKeys.AlbumEmail);
     removeEntry(SupportedStorageKeys.AlbumToken);
-    setUser(null);
     router.push('/');
   }, []);
   return (
