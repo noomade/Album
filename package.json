@@ -4,9 +4,8 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.3",
-    "@types/node": "^12.0.0",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
+    "@material-ui/icons": "^4.11.2",
+    "clsx": "^1.1.1",
     "final-form": "^4.20.2",
     "final-form-material-ui": "^0.3.0",
     "next": "^10.0.9",
@@ -14,12 +13,17 @@
     "react-dev-utils": "^11.0.3",
     "react-dom": "^17.0.1",
     "react-final-form": "^6.5.2",
+    "react-swipeable-views": "^0.13.9",
+    "react-swipeable-views-utils": "^0.14.0-alpha.0",
     "typescript": "^4.1.2"
   },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "eslint \"./**/*.+(ts|tsx|js|jsx)\"",
+    "validate": "eslint \"**/*.+(ts|tsx|js|jsx)\"",
+    "format": "prettier \"**/*.+(ts|tsx|js|jsx|json|css)\" --ignore-path ./.prettierignore"
   },
   "browserslist": {
     "production": [
@@ -32,5 +36,24 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/node": "^12.0.0",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@types/react-swipeable-views": "^0.13.0",
+    "@types/react-swipeable-views-utils": "^0.13.2",
+    "@typescript-eslint/eslint-plugin": "^3.10.1",
+    "@typescript-eslint/parser": "^3.10.1",
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.20.6",
+    "eslint-plugin-react-hooks": "^4",
+    "prettier": "^2.2.1"
   }
 }
