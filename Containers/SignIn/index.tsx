@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function SignIn({ user, setUser }: DefaultPageProps): ReactElement {
+function SignIn({ setUser }: DefaultPageProps): ReactElement {
   const classes = useStyles();
   const router = useRouter();
   React.useEffect(() => {

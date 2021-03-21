@@ -19,6 +19,7 @@ function SimpleAds(props: AppProps): ReactElement {
   React.useEffect(() => {
     const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles) {
+      // @ts-ignore-next-line
       jssStyles.parentElement.removeChild(jssStyles);
     }
   }, []);

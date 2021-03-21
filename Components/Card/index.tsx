@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function Card({ title, thumbnailUrl, photos, userId, id }: ExtendedAlbum): ReactElement {
+export default function Card({ title, thumbnailUrl, photos }: ExtendedAlbum): ReactElement {
   const [open, setOpen] = React.useState<boolean>(false);
   const classes = useStyles();
 

@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 // TYPES
 import { DefaultPageProps } from '../../types';
 
-function LogOutPage({ user, token, setUser }: DefaultPageProps): ReactElement {
+function LogOutPage({ setUser }: DefaultPageProps): ReactElement {
   const router = useRouter();
   React.useEffect(() => {
     localStorage.removeItem('@simple-ads/email');

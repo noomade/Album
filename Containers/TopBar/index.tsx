@@ -79,7 +79,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const pages = {
+export const pages: { [name: string]: string } = {
   '/albums': 'Albums',
   '/about': 'Sobre',
   '/logout': 'Sair',
