@@ -1,11 +1,12 @@
-import React, { ReactElement } from "react";
-import { Field } from "react-final-form";
-import { BaseTextFieldProps, TextField } from "@material-ui/core";
+import React, { ReactElement } from 'react';
+import { Field } from 'react-final-form';
+import { BaseTextFieldProps, TextField } from '@material-ui/core';
 
 interface iProps extends BaseTextFieldProps {
   name: string;
   label: string;
   type?: string;
+  validate?: (value: any) => undefined | string;
   fullWidth?: boolean;
   initialValue?: string;
   disabled?: boolean;
@@ -13,11 +14,13 @@ interface iProps extends BaseTextFieldProps {
 }
 const Index = (props: iProps): ReactElement => {
   return (
-    <Field name={props.name}>
-      {(fieldProps) => (
-        <div>
+    <Field name={props.name} label={props.label} validate={props.validate}>
+      {(fieldProps) => {
+        const p = { ...props };
+        delete p.validate;
+        return (
           <TextField
-            {...props}
+            {...p}
             className={props.className}
             label={props.label}
             name={fieldProps.input.name}
@@ -27,9 +30,11 @@ const Index = (props: iProps): ReactElement => {
             color="secondary"
             fullWidth
             required={props.required}
+            error={!fieldProps.meta.pristine && fieldProps.meta.error}
+            helperText={!fieldProps.meta.pristine && fieldProps.meta.error}
           />
-        </div>
-      )}
+        );
+      }}
     </Field>
   );
 };
