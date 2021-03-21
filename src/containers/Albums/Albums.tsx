@@ -1,16 +1,20 @@
 import React, { ReactElement } from 'react';
 
 // TYPES
-import { DefaultPageProps, ExtendedAlbum } from '../../types';
+import type { DefaultPageProps, ExtendedAlbum } from '../../types';
 
 // COMPONENTS
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import Card from '../../Components/Card';
 import Typography from '@material-ui/core/Typography';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { Card } from '../../components';
 
 // NEXT JS
 import { useRouter } from 'next/router';
+
+// MIDDLEWARE
+import { retrieve, SupportedStorageKeys } from '../../middleware/LocalStorage';
 
 export interface AlbumsPageProps extends DefaultPageProps {
   albums: Array<ExtendedAlbum>;
@@ -21,7 +25,7 @@ function AlbumsPage({ albums, searchText, user }: AlbumsPageProps): ReactElement
   const [albumsDisplay, setAlbumsDisplay] = React.useState<Array<ExtendedAlbum>>([]);
   const router = useRouter();
   React.useEffect(() => {
-    if (!user && !localStorage.getItem('@simple-ads/email')) {
+    if (!user && !retrieve(SupportedStorageKeys.AlbumEmail)) {
       router.push('/');
     }
   }, []);
@@ -40,15 +44,22 @@ function AlbumsPage({ albums, searchText, user }: AlbumsPageProps): ReactElement
   return (
     <Container component="main" maxWidth="xl" id="album-container">
       <Grid container spacing={2} justify="center" alignContent="center">
-        {albumsDisplay.length >= 1 && user ? (
-          albumsDisplay.map((album, index) => {
-            return (
-              <Grid key={index} item xs={12} sm={6} md={4} lg={3} xl={2}>
-                <Card {...album} />
+        {albumsDisplay.length >= 1 && user
+          ? albumsDisplay.map((album, index) => {
+              return (
+                <Grid key={index} item xs={12} sm={6} md={4} lg={3} xl={2}>
+                  <Card {...album} />
+                </Grid>
+              );
+            })
+          : !searchText && (
+              <Grid item xs={12}>
+                <Typography variant="h4" component="h4" align="center">
+                  <CircularProgress />
+                </Typography>
               </Grid>
-            );
-          })
-        ) : (
+            )}
+        {Boolean(searchText && albumsDisplay.length <= 1) && (
           <Grid item xs={12}>
             <Typography variant="h4" component="h4" align="center">
               Nenhum resultado encontrado

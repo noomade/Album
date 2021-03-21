@@ -93,7 +93,7 @@ export interface TopBarProps {
   user: null | string;
 }
 
-export default function TopBar({ searchText, onSearchChange, user }: TopBarProps): ReactElement {
+function TopBar({ searchText, onSearchChange, user }: TopBarProps): ReactElement {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const classes = useStyles();
   const router = useRouter();
@@ -113,23 +113,25 @@ export default function TopBar({ searchText, onSearchChange, user }: TopBarProps
     <div className={classes.root}>
       <AppBar position="sticky">
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-controls="menu"
-            aria-haspopup="true"
-            onClick={handleMenuOpen}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Menu id="menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleMenuClose()}>
-            {!user && <MenuItem onClick={handleMenuClose('/')}>Entrar</MenuItem>}
-            {user && <MenuItem onClick={handleMenuClose('/albums')}>Albums</MenuItem>}
-            <MenuItem onClick={handleMenuClose('/about')}>Sobre</MenuItem>
-            {user && <MenuItem onClick={handleMenuClose('/logout')}>Sair</MenuItem>}
-          </Menu>
-
+          {user && (
+            <>
+              <IconButton
+                edge="start"
+                className={classes.menuButton}
+                color="inherit"
+                aria-controls="menu"
+                aria-haspopup="true"
+                onClick={handleMenuOpen}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Menu id="menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleMenuClose()}>
+                <MenuItem onClick={handleMenuClose('/albums')}>Albums</MenuItem>
+                <MenuItem onClick={handleMenuClose('/about')}>Sobre</MenuItem>
+                <MenuItem onClick={handleMenuClose('/logout')}>Sair</MenuItem>
+              </Menu>
+            </>
+          )}
           <Typography className={classes.title} variant="h6" noWrap>
             {pages[router.pathname]}
           </Typography>
@@ -162,3 +164,5 @@ export default function TopBar({ searchText, onSearchChange, user }: TopBarProps
     </div>
   );
 }
+
+export default TopBar;

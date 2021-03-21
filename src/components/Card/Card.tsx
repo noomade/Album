@@ -23,10 +23,10 @@ import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined';
 import { capitalize } from '../../helpers/utils';
 
 // TYPES
-import { ExtendedAlbum } from '../../types';
+import type { ExtendedAlbum } from '../../types';
 
 // LAZY
-const Carousel = React.lazy(() => import('../Carousel/index'));
+const Carousel = React.lazy(() => import('../Carousel/Carousel'));
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

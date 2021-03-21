@@ -16,7 +16,7 @@ import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import { capitalize } from '../../helpers/utils';
 
 // TYPES
-import { Photos } from '../../types';
+import type { Photos } from '../../types';
 
 const useStyles = makeStyles((theme) => ({
   root: {

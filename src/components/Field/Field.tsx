@@ -1,5 +1,7 @@
 import React, { ReactElement } from 'react';
-import { Field } from 'react-final-form';
+
+// COMPONENTS
+import { Field as FinalField } from 'react-final-form';
 import { BaseTextFieldProps, TextField } from '@material-ui/core';
 
 interface iProps extends BaseTextFieldProps {
@@ -12,9 +14,9 @@ interface iProps extends BaseTextFieldProps {
   disabled?: boolean;
   required?: boolean;
 }
-const Index = (props: iProps): ReactElement => {
+const Field = (props: iProps): ReactElement => {
   return (
-    <Field name={props.name} label={props.label} validate={props.validate}>
+    <FinalField name={props.name} label={props.label} validate={props.validate}>
       {(fieldProps) => {
         const p = { ...props };
         delete p.validate;
@@ -35,8 +37,8 @@ const Index = (props: iProps): ReactElement => {
           />
         );
       }}
-    </Field>
+    </FinalField>
   );
 };
 
-export default Index;
+export default Field;

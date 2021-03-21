@@ -1,12 +1,15 @@
-import { Albums, ExtendedAlbum, Photo, Photos } from '../../types';
+// PAGES
+import { Albums } from '../../containers';
 
-import AlbumsPage from '../../Containers/Albums';
+// MIDDLEWARE
+import api from '../../middleware/api';
+
+// TYPES
+import type { Albums as AlbumsType, ExtendedAlbum, Photo, Photos } from '../../types';
 
 export async function getStaticProps() {
-  const albumsRes = await fetch('https://jsonplaceholder.typicode.com/albums');
-  const albums: Albums = await albumsRes.json();
-  const photosRes = await fetch('https://jsonplaceholder.typicode.com/photos');
-  const photos: Photos = await photosRes.json();
+  const albums: AlbumsType = await api.fetchAlbums();
+  const photos: Photos = await api.fetchPhotos();
   const fullDataStream: Array<ExtendedAlbum> = [];
 
   albums.forEach((album) => {
@@ -26,4 +29,4 @@ export async function getStaticProps() {
   };
 }
 
-export default AlbumsPage;
+export default Albums;

@@ -1,17 +1,28 @@
 import React, { ReactElement } from 'react';
+
+// NEXT JS
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
+
+// COMPONENTS
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import { TopBar } from '../containers';
+
+// MATERIAL THEME
 import theme from '../helpers/theme';
-import TopBar from '../Containers/TopBar';
+
+// MIDDLEWARE
+import { retrieve, SupportedStorageKeys } from '../middleware/LocalStorage';
 
 function SimpleAds(props: AppProps): ReactElement {
   const [searchText, setSearchText] = React.useState<string>('');
   const [user, setUser] = React.useState<null | string>(null);
   React.useEffect(() => {
-    const usr = localStorage.getItem('@simple-ads/email');
-    setUser(usr);
+    const usr: string = retrieve(SupportedStorageKeys.AlbumEmail);
+    if (usr) {
+      setUser(usr);
+    }
   }, []);
 
   const { Component, pageProps } = props;

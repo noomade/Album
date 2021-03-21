@@ -7,14 +7,18 @@ import Typography from '@material-ui/core/Typography';
 // NEXT JS
 import { useRouter } from 'next/router';
 
+// MIDDLEWARE
+import { removeEntry, SupportedStorageKeys } from '../../middleware/LocalStorage';
+
 // TYPES
-import { DefaultPageProps } from '../../types';
+import type { DefaultPageProps } from '../../types';
+
 
 function LogOutPage({ setUser }: DefaultPageProps): ReactElement {
   const router = useRouter();
   React.useEffect(() => {
-    localStorage.removeItem('@simple-ads/email');
-    localStorage.removeItem('@simple-ads/token');
+    removeEntry(SupportedStorageKeys.AlbumEmail);
+    removeEntry(SupportedStorageKeys.AlbumToken);
     setUser(null);
     router.push('/');
   }, []);

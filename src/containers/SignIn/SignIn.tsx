@@ -6,16 +6,19 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { Form } from 'react-final-form';
-import Field from '../../Components/Field';
+import { Field } from '../../components';
 
 // NEXTJS
 import { useRouter } from 'next/router';
 
 // HELPERS
-import { composeValidators, email, required } from '../../helpers/utils';
+import { composeValidators, email, required } from '../../components/Field/validation';
+
+// MIDDLEWARE
+import { retrieve, save, SupportedStorageKeys } from '../../middleware/LocalStorage';
 
 // TYPES
-import { DefaultPageProps } from '../../types';
+import type { DefaultPageProps } from '../../types';
 
 type SignInFormValues = {
   email: string;
@@ -45,8 +48,8 @@ function SignIn({ setUser }: DefaultPageProps): ReactElement {
   const classes = useStyles();
   const router = useRouter();
   React.useEffect(() => {
-    if (localStorage.getItem('@simple-ads/email') || localStorage.getItem('@simple-ads/token')) {
-      setUser(localStorage.getItem('@simple-ads/email'));
+    if (retrieve(SupportedStorageKeys.AlbumEmail) || retrieve(SupportedStorageKeys.AlbumToken)) {
+      setUser(retrieve(SupportedStorageKeys.AlbumEmail));
       // TODO: validate token
       router.push('/albums');
     }
@@ -56,7 +59,7 @@ function SignIn({ setUser }: DefaultPageProps): ReactElement {
       <Form
         onSubmit={(values: SignInFormValues) => {
           if (typeof localStorage !== undefined) {
-            localStorage.setItem('@simple-ads/email', values.email);
+            save(SupportedStorageKeys.AlbumEmail, values.email);
             setUser(values.email);
             // TODO: async call in redux
             router.push('/albums');
