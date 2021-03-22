@@ -1,8 +1,3 @@
-import React, { ReactElement } from 'react';
+import { About } from '../../containers';
 
-const AboutPage = (): ReactElement => {
-  // TODO: About Page
-  return <div>e ai</div>;
-};
-
-export default AboutPage;
+export default About;
