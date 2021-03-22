@@ -4,11 +4,6 @@ import { ServerStyleSheets } from '@material-ui/core/styles';
 import theme from '../helpers/theme';
 
 export default class MyDocument extends Document {
-  componentDidCatch(error, errorInfo): void {
-    console.log('error', error);
-    console.log('errorInfo', errorInfo);
-  }
-
   render(): JSX.Element {
     return (
       <Html lang="en">
