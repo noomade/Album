@@ -86,11 +86,6 @@ function TopBar({ searchText, onSearchChange }: TopBarProps): ReactElement {
       setUser(usr);
     }
   }, [retrieve(SupportedStorageKeys.AlbumEmail)]);
-  React.useEffect(() => {
-    if (router.pathname === '/logout') {
-      setUser('');
-    }
-  }, [router]);
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -100,6 +95,9 @@ function TopBar({ searchText, onSearchChange }: TopBarProps): ReactElement {
     setAnchorEl(null);
     if (href) {
       router.push(href);
+    }
+    if (href === '/logout') {
+      setUser('');
     }
   };
 
