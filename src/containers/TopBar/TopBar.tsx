@@ -77,15 +77,20 @@ export interface TopBarProps {
 
 function TopBar({ searchText, onSearchChange }: TopBarProps): ReactElement {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [user, setUser] = React.useState<string>('');
   const classes = useStyles();
   const router = useRouter();
-  const [user, setUser] = React.useState<string>('');
   React.useEffect(() => {
     const usr: string = retrieve(SupportedStorageKeys.AlbumEmail);
     if (usr) {
       setUser(usr);
     }
   }, [retrieve(SupportedStorageKeys.AlbumEmail)]);
+  React.useEffect(() => {
+    if (router.pathname === '/logout') {
+      setUser('');
+    }
+  }, [router]);
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
