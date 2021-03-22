@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 
 // TRANSITIONS
@@ -40,17 +41,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     justifyContent: 'flex-start',
   },
   contentMedia: {
-    height: '60%',
+    height: '70%',
   },
   contentTitle: {
-    height: '40%',
+    height: '30%',
   },
   dialogTitle: {
     display: 'flex',
     justifyContent: 'space-between',
-  },
-  dialogContent: {
-    display: 'flex',
   },
 }));
 
@@ -72,6 +70,7 @@ export default function Card({ title, thumbnailUrl, photos }: ExtendedAlbum): Re
           </CardActionArea>
         </MuiCard>
       </Grow>
+
       <Dialog
         open={open}
         onClose={() => setOpen(false)}
@@ -83,12 +82,14 @@ export default function Card({ title, thumbnailUrl, photos }: ExtendedAlbum): Re
         scroll="body"
       >
         <DialogTitle id="dialog-title" disableTypography className={classes.dialogTitle}>
-          <Typography variant="h5" component="h2">
+          <Typography variant="h5" component="h2" align="left">
             {capitalize(title)}
           </Typography>
-          <IconButton onClick={() => open && setOpen(false)}>
-            <CloseOutlinedIcon />
-          </IconButton>
+          <DialogActions>
+            <IconButton onClick={() => open && setOpen(false)}>
+              <CloseOutlinedIcon />
+            </IconButton>
+          </DialogActions>
         </DialogTitle>
         <DialogContent>
           <Suspense fallback={<CircularProgress />}>
