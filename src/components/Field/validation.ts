@@ -5,7 +5,7 @@ export const composeValidators = (...validators: any[]) => (value: FieldTypeText
   validators.reduce((error, validator) => (error ? error : validator(value)), undefined);
 
 export const required = (value: FieldTypeTextValues): undefined | 'Campo Obrigatório' =>
-  (value !== null || value !== undefined) && value.toString().length > 0 ? undefined : 'Campo Obrigatório';
+  value && value.toString().length > 0 ? undefined : 'Campo Obrigatório';
 
 export const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 

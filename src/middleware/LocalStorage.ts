@@ -10,7 +10,7 @@ export const save = <T>(key: SupportedStorageKeys, value: T): void => {
   }
 };
 
-export const retrieve = <T>(key: SupportedStorageKeys): T => {
+export const retrieve = (key: SupportedStorageKeys): any => {
   if (typeof window !== 'undefined') {
     const response = window.localStorage.getItem(key);
     return response ? JSON.parse(response) : null;

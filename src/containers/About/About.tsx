@@ -48,11 +48,12 @@ function About() {
           </Typography>
           <List>
             {Object.keys(packageJSON.dependencies).map((dependencie: string) => {
+              // @ts-ignore-next-line
               const label = `${dependencie} using version @${packageJSON.dependencies[dependencie]}`;
               return (
-                <Typography component={ListItem} key={dependencie} variant="body2" align="center">
+                <ListItem component={Typography} key={dependencie} variant="body2" align="center">
                   {label}
-                </Typography>
+                </ListItem>
               );
             })}
           </List>
@@ -63,11 +64,12 @@ function About() {
           </Typography>
           <List>
             {Object.keys(packageJSON.scripts).map((script: string) => {
+              // @ts-ignore-next-line
               const label = `"yarn ${script}" that runs "yarn ${packageJSON.scripts[script]}"`;
               return (
-                <Typography component={ListItem} key={script} variant="body2" align="left">
+                <ListItem component={Typography} key={script} variant="body2" align="left">
                   {label}
-                </Typography>
+                </ListItem>
               );
             })}
           </List>
@@ -84,11 +86,12 @@ function About() {
           </Typography>
           <List>
             {Object.keys(packageJSON.devDependencies).map((devDep: string) => {
+              // @ts-ignore-next-line
               const label = `${devDep} using version @${packageJSON.devDependencies[devDep]}`;
               return (
-                <Typography component={ListItem} key={devDep} variant="body2" align="left">
+                <ListItem component={Typography} key={devDep} variant="body2" align="left">
                   {label}
-                </Typography>
+                </ListItem>
               );
             })}
           </List>
